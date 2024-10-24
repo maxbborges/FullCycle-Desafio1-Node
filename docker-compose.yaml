@@ -1,5 +1,3 @@
-version: '3'
-
 services: 
   node:
     build:
@@ -8,12 +6,11 @@ services:
     container_name: node
     volumes:
       - ./node:/usr/src/app
-    entrypoint: dockerize -wait tcp://nginx:80 -wait tcp://db:3306 -timeout 40s docker-entrypoint.sh
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 40s sh -c 'npm install && npm start;'
     networks: 
       - fullcycle
     tty: true
-    depends_on: 
-       - nginx
+    depends_on:
        - db
 
   nginx:
@@ -26,6 +23,9 @@ services:
       - fullcycle
     ports: 
       - "8080:80"
+    depends_on:
+       - node
+       - db
   
   db:
     image: mysql:5.7

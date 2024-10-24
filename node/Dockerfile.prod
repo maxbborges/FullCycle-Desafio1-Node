@@ -9,8 +9,8 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+#COPY ./node/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+#RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 3000
 # ENTRYPOINT [ "npm","start" ]
 # CMD ["fastcgi","-p","9000","index.js"]
